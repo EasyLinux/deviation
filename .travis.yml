@@ -127,7 +127,7 @@ after_success:
     fi;
   - if [ "$MAKETARGET" == "test" ]; then
       ../utils/coverage-summary.sh;
-      coveralls --gcov-options '\-lp';
+      coveralls -r . -b . --gcov-options '\-lp';
     fi;
        
 cache:
