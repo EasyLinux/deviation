@@ -8,11 +8,11 @@ matrix:
       - env: MAKETARGET=lint
       - env: MAKETARGET=zip_devo8
 
-stages:
-    - name: nightly
-      if: type = cron
-    - name: test
-      if: type != cron
+#stages:
+#    - name: nightly
+#      if: type = cron
+#    - name: test
+#      if: type != cron
 
 dist: trusty
 
