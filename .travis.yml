@@ -5,7 +5,8 @@ matrix:
     include:
       - stage: nightly
         env: MAKETARGET="zips winzips"
-      - env: MAKETARGET=lint
+      - stage: test
+        env: MAKETARGET=lint
       - env: MAKETARGET=zip_devo8
 
 stages:
