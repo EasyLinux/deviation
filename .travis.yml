@@ -3,7 +3,7 @@ matrix:
 #Do not define 'global' env vars here.  They cannot be used with API builds
     fast_finish: true
     include:
-      - stage: nightly
+      - stage: deploy
         env: MAKETARGET="zips winzips"
       - env: MAKETARGET="translate"
       - stage: build
@@ -12,7 +12,7 @@ matrix:
       - env: MAKETARGET=zip_devo10
 
 stages:
-    - name: nightly
+    - name: deploy
       if: type != cron
     - name: build
       if: type = cron
@@ -27,3 +27,4 @@ git:
 script: 
   - |
     echo $MAKETARGET
+    echo $TRAVIS_BUILD_STAGE_NAME
