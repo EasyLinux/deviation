@@ -3,13 +3,16 @@ matrix:
 #Do not define 'global' env vars here.  They cannot be used with API builds
     fast_finish: true
     include:
-      - if: type = cron
-        env:
-          MAKETARGET="zips winzips"
-      - if: type != cron
-        env:
-          MAKETARGET=lint
-          MAKETARGET=zip_devo8
+      - stage: nightly
+        env: MAKETARGET="zips winzips"
+      - env: MAKETARGET=lint
+      - env: MAKETARGET=zip_devo8
+
+stages:
+    - name: nightly
+      i:f type = cron
+    - name test
+      if: type != cron
 
 dist: trusty
 
