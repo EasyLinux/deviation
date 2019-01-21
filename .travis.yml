@@ -13,9 +13,9 @@ matrix:
 
 stages:
     - name: nightly
-      if: type = cron
-    - name: build
       if: type != cron
+    - name: build
+      if: type = cron
 
 dist: trusty
 
