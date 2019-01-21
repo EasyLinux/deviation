@@ -49,11 +49,12 @@ install:
    - |
      export reqs=""
      case $MAKETARGET in
-     test)  export reqs="$reqs test" ;;
-     lint)  export reqs="$reqs lint" ;;
-     *win*) export reqs="$reqs win" ;;&
-     *emu*) ;; # catch emulator builds that don't need arm
-     *)     export reqs="$reqs arm" ;;
+       test)  export reqs="$reqs test" ;;
+       lint)  export reqs="$reqs lint" ;;
+       *win*) export reqs="$reqs win" ;;&
+       *emu*) ;; # catch emulator builds that don't need arm
+       *)     export reqs="$reqs arm" ;;
+     esac
      echo "Requirements: $reqs"
    # These are separated to make it easier to visualize the build in the travis logs
    - if [[ $reqs = *"test"* ]]; then pip install --user cpp-coveralls; fi
