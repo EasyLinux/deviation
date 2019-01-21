@@ -61,7 +61,7 @@ install:
    - if [[ $reqs == *"lint"* ]]; then pip install --user cpplint; fi
    - |
      if [[ $reqs == *"arm"* ]]; then
-       if [[ ! -d "$HOME/gcc-arm-none-eabi-4_8-2013q4/bin" ]; then
+       if [[ ! -d "$HOME/gcc-arm-none-eabi-4_8-2013q4/bin" ]]; then
          pushd $HOME
          curl --retry 10 --retry-max-time 120 -L \
              "https://launchpad.net/gcc-arm-embedded/4.8/4.8-2013-q4-major/+download/gcc-arm-none-eabi-4_8-2013q4-20131204-linux.tar.bz2" | tar xfj -
@@ -86,7 +86,7 @@ install:
      fi
    - |
      if [[ $reqs == *"win"* ]]; then
-       if [[ ! -d "$HOME/portaudio-w32/bin" ]; then
+       if [[ ! -d "$HOME/portaudio-w32/bin" ]]; then
          mkdir $HOME/src
          mkdir $HOME/portaudio-w32
          pushd $HOME/src
@@ -100,7 +100,7 @@ install:
      fi
    - |
      if [[ $reqs == *"win"* ]]; then
-       if [[ ! -d "$HOME/mpg123-w32/bin" ]; then
+       if [[ ! -d "$HOME/mpg123-w32/bin" ]]; then
          mkdir $HOME/src
          mkdir $HOME/mpg123-w32
          pushd $HOME/src
