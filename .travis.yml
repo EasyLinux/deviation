@@ -5,13 +5,16 @@ matrix:
     include:
       - stage: nightly
         env: MAKETARGET="zips winzips"
-      - stage: test
-        env: MAKETARGET=lint
+      - stage: build
+      - env: MAKETARGET=lint
       - env: MAKETARGET=zip_devo8
+      - env: MAKETARGET=zip_devo10
 
 stages:
     - name: nightly
-    - name: test
+      if: type = cron
+    - name: build
+      if: type != cron
 
 dist: trusty
 
