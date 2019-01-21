@@ -59,6 +59,7 @@ install:
    # These are separated to make it easier to visualize the build in the travis logs
    - if [[ $reqs == *"test"* ]]; then pip install --user cpp-coveralls; fi
    - if [[ $reqs == *"lint"* ]]; then pip install --user cpplint; fi
+   - |
      if [ $reqs == *"arm"* ]]; then
        if [ ! -d "$HOME/gcc-arm-none-eabi-4_8-2013q4/bin" ]; then
          pushd $HOME
