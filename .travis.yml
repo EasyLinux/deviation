@@ -60,8 +60,8 @@ install:
    - if [[ $reqs == *"test"* ]]; then pip install --user cpp-coveralls; fi
    - if [[ $reqs == *"lint"* ]]; then pip install --user cpplint; fi
    - |
-     if [ $reqs == *"arm"* ]]; then
-       if [ ! -d "$HOME/gcc-arm-none-eabi-4_8-2013q4/bin" ]; then
+     if [[ $reqs == *"arm"* ]]; then
+       if [[ ! -d "$HOME/gcc-arm-none-eabi-4_8-2013q4/bin" ]; then
          pushd $HOME
          curl --retry 10 --retry-max-time 120 -L \
              "https://launchpad.net/gcc-arm-embedded/4.8/4.8-2013-q4-major/+download/gcc-arm-none-eabi-4_8-2013q4-20131204-linux.tar.bz2" | tar xfj -
@@ -85,7 +85,7 @@ install:
        export FLTK_DIR=$HOME/fltk-1.3.0-w32
      fi
    - |
-     if [ $reqs == *"win"* ]]; then
+     if [[ $reqs == *"win"* ]]; then
        if [[ ! -d "$HOME/portaudio-w32/bin" ]; then
          mkdir $HOME/src
          mkdir $HOME/portaudio-w32
@@ -99,8 +99,8 @@ install:
        export PORTAUDIO_DIR=$HOME/portaudio-w32
      fi
    - |
-     if [ $reqs == *"win"* ]]; then
-       if [ ! -d "$HOME/mpg123-w32/bin" ]; then
+     if [[ $reqs == *"win"* ]]; then
+       if [[ ! -d "$HOME/mpg123-w32/bin" ]; then
          mkdir $HOME/src
          mkdir $HOME/mpg123-w32
          pushd $HOME/src
@@ -138,7 +138,7 @@ script:
         ../utils/archive_build_size.py "$MAKETARGET" || /bin/true;
     fi
   - |
-    if [ "$MAKETARGET" == "test" ]; then
+    if [[ "$MAKETARGET" == "test" ]]; then
         ./test.elf
         ../utils/coverage-summary.sh;
         coveralls -r . -b . --gcov-options '\-lp' -E '.*/tests/test_.*' -E '.*/objs/';
@@ -150,16 +150,16 @@ after_success:
         travis_terminate 0
     fi
   - |
-    if [ "$TRAVIS_EVENT_TYPE" == "api" && $TRAVIS_BRANCH != "master" ]; then
+    if [[ "$TRAVIS_EVENT_TYPE" == "api" && $TRAVIS_BRANCH != "master" ]]; then
         export RELEASE_VERSION=$(echo $TRAVIS_BRANCH | egrep -o '[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+');
-        if [ "$RELEASE_VERSION" != "" ] && [ "$TRAVIS_BRANCH" == "v$RELEASE_VERSION" ]; then
+        if [[ "$RELEASE_VERSION" != "" && "$TRAVIS_BRANCH" == "v$RELEASE_VERSION" ]]; then
             echo "Releasing $RELEASE_VERSION";
             ../utils/upload_test_build.pl -skip -release "$RELEASE_VERSION" -delete;
             ../utils/upload_test_build.pl -skip -release "$RELEASE_VERSION" *.zip;
         fi;
     else
         export NIGHTLY_DATE=$(date "+%Y-%m-%d");
-        if [ "$NIGHTLY_DATE" != "" ]; then
+        if [[ "$NIGHTLY_DATE" != "" ]]; then
             echo "Uploading Nightly - $NIGHTLY_DATE";
             ../utils/upload_test_build.pl -skip -nightly "$NIGHTLY_DATE" -delete;
             ../utils/upload_test_build.pl -skip -nightly "$NIGHTLY_DATE" *.zip;
